@@ -114,3 +114,71 @@ if (userMoney >= totalAmount || userAge >= 18) {
 // // const surname = 'boshqa';
 // surname = 'Norqulov';
 // console.log(surname);
+
+// imtihon
+
+const elementTitle = document.querySelector('#ball');
+const result = document.querySelector('#result');
+
+const number = Number(prompt('balingizni kiriting!'));
+
+if (isNaN(number)) {
+	alert('iltimos bal kiriting');
+}
+
+elementTitle.textContent += number;
+
+if (number > 0 && number <= 80) {
+	result.style.color = 'red';
+	result.innerHTML = "<strong>o'qishdan yiqildingiz </strong>";
+} else if (number > 80 && number <= 100) {
+	result.textContent = 'superkontraktga kirdingiz';
+} else if (number > 100 && number <= 150) {
+	result.innerHTML = "kontrakt asosida o'qishga kirdingiz";
+} else if (number > 150 && number <= 180) {
+	result.textContent = 'byudjetga kirdingiz';
+} else {
+	alert("noto'g'ri raqam kiritdingiz");
+}
+
+const elForm = document.querySelector('#form');
+const elName = document.querySelector('#name');
+const elEmail = document.querySelector('#email');
+const elNumber = document.querySelector('#number');
+const elText = document.querySelector('#text');
+const elResultName = document.querySelector('#result-name');
+const elResultEmail = document.querySelector('#result-email');
+const elResultText = document.querySelector('#result-text');
+
+const elHelloButton = document.querySelector('#hello-button');
+
+elForm.addEventListener('submit', function (e) {
+	e.preventDefault();
+
+	if (elName.value !== '') {
+		elResultName.textContent = 'Ismingiz: ';
+		elResultText.textContent = 'Fikringiz: ';
+		elResultEmail.textContent = 'Emailingiz: ';
+
+		elResultName.textContent += elName.value;
+		elResultText.textContent += elText.value;
+		elResultEmail.textContent += elEmail.value;
+
+		elName.className += ' success';
+		elText.className += ' success';
+
+		elEmail.value = '';
+		elText.value = '';
+		elName.value = '';
+	} else {
+		elResultName.textContent = 'iltimos ismingizni kiriting!';
+		elName.style.border = '1px solid red';
+	}
+});
+
+elHelloButton.addEventListener('mouseover', function () {
+	elHelloButton.textContent = 'Salom dunyo';
+});
+elHelloButton.addEventListener('mouseout', function () {
+	elHelloButton.textContent = 'xayr dunyo';
+});

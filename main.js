@@ -1,20 +1,16 @@
-const elementTitle = document.querySelector('#ball');
-const result = document.querySelector('#result');
+const number = Number(prompt('son kiriting'));
 
-const number = Number(prompt('balingizni kiriting!'));
+// number % 3 === 0  --> Fizz
+// number % 5 === 0  --> Buzz
+// number % 15 === 0  --> FizzBuzz
+// else  --> number
 
-elementTitle.textContent += number;
-
-console.log(number);
-if (number > 0 && number <= 80) {
-	result.style.color = 'red';
-	result.innerHTML = "<strong>o'qishdan yiqildingiz </strong>";
-} else if (number > 80 && number <= 100) {
-	result.textContent = 'superkontraktga kirdingiz';
-} else if (number > 100 && number <= 150) {
-	result.innerHTML = "kontrakt asosida o'qishga kirdingiz";
-} else if (number > 150 && number <= 180) {
-	result.textContent = 'byudjetga kirdingiz';
+if (number % 15 == 0) {
+	console.log('FizzBuzz');
+} else if (number % 3 == 0) {
+	console.log('Fizz');
+} else if (number % 5 == 0) {
+	console.log('Buzz');
 } else {
-	alert("noto'g'ri raqam kiritdingiz");
+	console.log(number);
 }
