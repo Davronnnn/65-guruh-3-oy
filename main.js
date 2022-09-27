@@ -1,19 +1,20 @@
-const number = Number(prompt('son kiriting'));
+const elementTitle = document.querySelector('#ball');
+const result = document.querySelector('#result');
 
-let isHuge;
+const number = Number(prompt('balingizni kiriting!'));
 
-if (number > 20) {
-	isHuge = true;
-} else {
-	isHuge = false;
-}
-//
-console.log(isHuge, !isHuge);
-if (ball < 80) {
-	console.log('son 20 dan katta');
-} else if (ball > 80 && 100 < ball) {
-} else if (ball > 100 && ball < 150) {
-} else if (ball > 150 && ball <= 180) {
+elementTitle.textContent += number;
+
+console.log(number);
+if (number > 0 && number <= 80) {
+	result.style.color = 'red';
+	result.innerHTML = "<strong>o'qishdan yiqildingiz </strong>";
+} else if (number > 80 && number <= 100) {
+	result.textContent = 'superkontraktga kirdingiz';
+} else if (number > 100 && number <= 150) {
+	result.innerHTML = "kontrakt asosida o'qishga kirdingiz";
+} else if (number > 150 && number <= 180) {
+	result.textContent = 'byudjetga kirdingiz';
 } else {
 	alert("noto'g'ri raqam kiritdingiz");
 }
