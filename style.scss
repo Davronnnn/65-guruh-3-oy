@@ -1,0 +1,7 @@
+@mixin nimadir($color: blue) {
+	color: $color;
+}
+
+p {
+	@include nimadir();
+}

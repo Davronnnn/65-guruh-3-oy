@@ -1,3 +1,105 @@
+// ! time finder with function
+const elForm = document.querySelector('.form');
+const elInput = document.querySelector('#space');
+const elResultPerson = document.querySelector('.result-time-person');
+const elResultBycycle = document.querySelector('.result-time-bycycle');
+const elResultCar = document.querySelector('.result-time-car');
+const elResultPlane = document.querySelector('.result-time-plane');
+
+const personSpeed = 3.6;
+const bycycleSpeed = 20.1;
+const carSpeed = 70;
+const planeSpeed = 800;
+
+function timeFinder(speed, space = Number(elInput.value)) {
+	const totalTime = space / speed;
+	const hour = Math.floor(totalTime);
+	const minuteTotal = (totalTime - hour) * 60;
+	const minute = Math.floor(minuteTotal);
+	const second = Math.round((minuteTotal - minute) * 60);
+
+	const result = `${hour} soat ${minute} daqiqa ${second} soniya`;
+
+	return result;
+}
+
+elForm.addEventListener('submit', function (e) {
+	e.preventDefault();
+
+	elResultPerson.textContent = `Piyoda ${timeFinder(
+		personSpeed
+	)} yetib keladi`;
+	elResultBycycle.textContent = `Piyoda ${timeFinder(
+		bycycleSpeed
+	)} yetib keladi`;
+	elResultCar.textContent = `Piyoda ${timeFinder(carSpeed)} yetib keladi`;
+	elResultPlane.textContent = `Piyoda ${timeFinder(planeSpeed)} yetib keladi`;
+});
+
+// ! function
+// const number = 12;
+// let result = null;
+
+// // declaration
+// function pifagorCalculator(katet1, katet2) {
+// 	result = Math.sqrt(katet1 * katet1 + katet2 * katet2);
+// 	console.log(result);
+// }
+
+// // expression
+
+// const addNumber = function nimadir(a, b) {
+// 	console.log(a + b);
+// };
+
+// addNumber(3, 2);
+
+// pifagorCalculator(6, 8);
+// pifagorCalculator(3, 4);
+
+// const elForm = document.querySelector('.form');
+
+// const text = 'Davron';
+// const elInput = document.querySelector('#space');
+
+// elForm.addEventListener('submit', function (e) {
+// 	e.preventDefault();
+
+// 	const result = elInput.value.trim();
+
+// 	console.log(result);
+
+// });
+
+// for (let i = 0; i > 10; i++) {
+// 	console.log(i);
+// }
+
+// let i = 0;
+// while (i > 10) {
+// 	console.log(i);
+// 	i++;
+// }
+
+// do {
+// 	console.log(i);
+// 	i++;
+// } while (i > 10);
+
+//! string methods
+// const elForm = document.querySelector('.form');
+
+// const text = 'Davron';
+// const elInput = document.querySelector('#space');
+
+// elForm.addEventListener('submit', function (e) {
+// 	e.preventDefault();
+
+// 	const result = elInput.value.trim();
+
+// 	console.log(result.toLowerCase());
+// });
+
 // ==  faqat value bo'yicha tekshiradi
 // === qiymat va tur (data type) bo'yicha tekshiradi
 

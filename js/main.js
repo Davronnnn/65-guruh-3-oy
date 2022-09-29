@@ -1,12 +1,9 @@
-const elForm = document.querySelector('.form');
+function isEven(num) {
+	if (num % 2 === 0 && num > 10) {
+		return 'soningiz juft son va 10 dan katta';
+	} else {
+		return 'soningiz toq yoki 10 dan kichkina';
+	}
+}
 
-const text = 'Davron';
-const elInput = document.querySelector('#space');
-
-elForm.addEventListener('submit', function (e) {
-	e.preventDefault();
-
-	const result = elInput.value.trim();
-
-	console.log(result.toLowerCase());
-});
+console.log(isEven(8));
