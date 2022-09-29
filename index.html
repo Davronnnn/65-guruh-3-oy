@@ -4,40 +4,65 @@
 		<meta charset="UTF-8" />
 		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
 		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<!-- // Operator Mono Lig, Menlo, Monaco, 'Courier New', monospace -->
 
-		<link rel="stylesheet" href="./style.css" />
+		<link
+			rel="stylesheet"
+			href="./node_modules/bootstrap/dist/css/bootstrap.min.css"
+		/>
+		<link rel="stylesheet" href="./css/style.css" />
 		<title>Document</title>
 	</head>
 	<body>
-		<form id="form">
-			<input id="name" type="text" placeholder="ismingizni kiriting" />
-			<input
-				id="email"
-				type="email"
-				placeholder="emailingizni kiriting"
-			/>
-			<input
-				id="number"
-				type="tel"
-				placeholder="telefon raqamingizni kiriting"
-			/>
-			<textarea
-				id="text"
-				placeholder="taklifingizni yuboring"
-				cols="30"
-				rows="10"
-			></textarea>
+		<div class="container pt-5">
+			<h2>Kim birinchi bo-rish-ga!</h2>
 
-			<button type="submit">Submit</button>
-		</form>
+			<form class="form mt-3">
+				<label for="space" class="d-flex">
+					Masofa
+					<input
+						class="form-control w-25 ms-3"
+						type="text"
+						id="space"
+					/>
+				</label>
+				<button class="btn mt-5 btn-warning w-50" type="submit">
+					Hisobla
+				</button>
+			</form>
 
-		<div class="result">
-			<p id="result-name">Ismingiz</p>
-			<p id="result-email">email</p>
-			<p id="result-text">text</p>
+			<div class="result mt-5 cards d-flex gap-3">
+				<div class="card" style="width: 18rem">
+					<img class="card-img-top" src="..." alt="Card Piyoda" />
+					<div class="card-body">
+						<h5 class="card-title">Piyoda</h5>
+						<p class="result-time-person"></p>
+					</div>
+				</div>
+				<div class="card" style="width: 18rem">
+					<img class="card-img-top" src="..." alt="velosiped" />
+					<div class="card-body">
+						<h5 class="card-title">velosiped</h5>
+						<p class="result-time-bycycle"></p>
+					</div>
+				</div>
+				<div class="card" style="width: 18rem">
+					<img class="card-img-top" src="..." alt="mashina" />
+					<div class="card-body">
+						<h5 class="card-title">mashina</h5>
+						<p class="result-time-car"></p>
+					</div>
+				</div>
+				<div class="card" style="width: 18rem">
+					<img class="card-img-top" src="..." alt="samolyot" />
+					<div class="card-body">
+						<h5 class="card-title">samolyot</h5>
+						<p class="result-time-plane"></p>
+					</div>
+				</div>
+			</div>
 		</div>
 
-		<button id="hello-button">salom</button>
-		<script src="./main.js"></script>
+		<script src="./js/main.js"></script>
 	</body>
 </html>
