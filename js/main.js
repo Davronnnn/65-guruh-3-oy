@@ -1,9 +1,10 @@
-function isEven(num) {
-	if (num % 2 === 0 && num > 10) {
-		return 'soningiz juft son va 10 dan katta';
-	} else {
-		return 'soningiz toq yoki 10 dan kichkina';
-	}
+const nimadir = 'asdas';
+
+function name2(a) {
+	// parametr
+	console.log(b);
+	return a + b;
 }
 
-console.log(isEven(8));
+console.log(name2(2, 5)); //argument
+console.log(name2);
