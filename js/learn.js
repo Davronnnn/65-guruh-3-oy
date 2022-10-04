@@ -1,3 +1,28 @@
+// const elInput = document.querySelector('#space');
+// const elForm = document.querySelector('form');
+// const elImage = document.querySelector('#main-image');
+
+// function formValidation(result, elementImage) {
+// 	if (result.length >= 6 && !isNaN(result)) {
+// 		elementImage.setAttribute(
+// 			'src',
+// 			'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTH0YPNvDPMgqcsDb48GCzTudWD3v_K0hP_Ok09gr7W&s'
+// 		);
+// 	} else {
+// 		console.log('ishlamadi');
+// 	}
+// }
+
+// const formHandler = function (e) {
+// 	e.preventDefault();
+
+// 	const inputResult = elInput.value.trim();
+
+// 	formValidation(inputResult, elImage);
+// };
+
+// elForm.addEventListener('submit', formHandler);
+
 // ! time finder with function
 const elForm = document.querySelector('.form');
 const elInput = document.querySelector('#space');
@@ -23,7 +48,7 @@ function timeFinder(speed, space = Number(elInput.value)) {
 	return result;
 }
 
-elForm.addEventListener('submit', function (e) {
+const formHandler = function (e) {
 	e.preventDefault();
 
 	elResultPerson.textContent = `Piyoda ${timeFinder(
@@ -34,8 +59,19 @@ elForm.addEventListener('submit', function (e) {
 	)} yetib keladi`;
 	elResultCar.textContent = `Piyoda ${timeFinder(carSpeed)} yetib keladi`;
 	elResultPlane.textContent = `Piyoda ${timeFinder(planeSpeed)} yetib keladi`;
-});
+};
 
+elForm.addEventListener('submit', formHandler);
+
+// function isEven(a) {
+// 	if (a % 2 === 0) {
+// 		return a;
+// 	} else {
+// 		return 'son toq son';
+// 	}
+// }
+
+// console.log(isEven(13));
 // ! function
 // const number = 12;
 // let result = null;
