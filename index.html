@@ -14,54 +14,24 @@
 		<title>Document</title>
 	</head>
 	<body>
-		<div class="container pt-5">
-			<h2>Kim birinchi bo-rish-ga!</h2>
-
-			<form class="form mt-3">
-				<label for="space" class="d-flex">
-					Masofa
+		<div class="container my-5">
+			<h3 class="text-center text-primary">Sizning mahsulotlaringiz</h3>
+			<div class="card shadow">
+				<form class="my-3 mx-auto w-50">
 					<input
-						class="form-control w-25 ms-3"
-						type="number"
-						id="space"
+						type="text"
+						class="new-product-input"
+						placeholder="Mahsulotingizni qo'shing "
 					/>
-				</label>
-				<button class="btn mt-5 btn-warning w-50">Hisobla</button>
-			</form>
-
-			<img width="100" id="main-image" height="100" alt="" />
-			<div class="result mt-5 cards d-flex gap-3">
-				<div class="card" style="width: 18rem">
-					<img class="card-img-top" src="..." alt="Card Piyoda" />
-					<div class="card-body">
-						<h5 class="card-title">Piyoda</h5>
-						<p class="result-time-person"></p>
-					</div>
-				</div>
-				<div class="card" style="width: 18rem">
-					<img class="card-img-top" src="..." alt="velosiped" />
-					<div class="card-body">
-						<h5 class="card-title">velosiped</h5>
-						<p class="result-time-bycycle"></p>
-					</div>
-				</div>
-				<div class="card" style="width: 18rem">
-					<img class="card-img-top" src="..." alt="mashina" />
-					<div class="card-body">
-						<h5 class="card-title">mashina</h5>
-						<p class="result-time-car"></p>
-					</div>
-				</div>
-				<div class="card" style="width: 18rem">
-					<img class="card-img-top" src="..." alt="samolyot" />
-					<div class="card-body">
-						<h5 class="card-title">samolyot</h5>
-						<p class="result-time-plane"></p>
-					</div>
-				</div>
+				</form>
+				<p
+					class="text-warning"
+					id="error-text"
+					style="font-size: 30px"
+				></p>
+				<ul id="product-list" class="p-5 list-group list-unstyled"></ul>
 			</div>
 		</div>
-
 		<script src="./js/main.js"></script>
 	</body>
 </html>

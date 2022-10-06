@@ -1,20 +1,24 @@
-const elInput = document.querySelector('#space');
-const elForm = document.querySelector('form');
-const elImage = document.querySelector('#main-image');
+const words = 'kartoshka piyoz sabzi shorbodring karamiddinjon olma';
 
-const formHandler = function (e) {
-	e.preventDefault();
+// words.split(' ').forEach((element) => {
+// 	console.log(element);
+// });
 
-	const inputResult = elInput.value.trim();
+function longWord(text) {
+	const array = text.split(' ');
+	let longWord = array[0];
 
-	const newH2 = document.createElement('h2');
+	for (let i = 1; i < array.length; i++) {
+		if (longWord.length < array[i].length) {
+			longWord = array[i];
+		}
+	}
+	array.forEach(function (item, i, nimadir) {
+		if (longWord.length < item.length) {
+			longWord = item;
+		}
+	});
+	return longWord;
+}
 
-	const h2TextContent =
-		inputResult > 18 ? 'voyaga yetgansiz' : 'voyaga yetmagansiz';
-
-	newH2.textContent = h2TextContent;
-	newH2.style.color = inputResult > 18 ? 'green' : 'red';
-	elForm.appendChild(newH2);
-};
-
-elForm.addEventListener('submit', formHandler);
+console.log(longWord(words));

@@ -1,3 +1,44 @@
+//! product list
+const productListELement = document.querySelector('#product-list');
+const productInputElement = document.querySelector('input');
+const formElement = document.querySelector('form');
+const errorText = document.querySelector('#error-text');
+
+const newArray = ['kartoshka', 'piyoz', 'sabzi', 'karam', 'olma'];
+
+function addListHandler(array, list) {
+	for (let i = 0; i < array.length; i++) {
+		const newLi = document.createElement('li');
+		newLi.innerHTML = `<p class="text-danger"> ${i + 1} ${array[i]} </p>`;
+		list.appendChild(newLi);
+	}
+}
+
+formElement.addEventListener('submit', function (e) {
+	e.preventDefault();
+
+	let hasProduct = false;
+	const inputValue = productInputElement.value;
+	for (let i = 0; i < newArray.length; i++) {
+		if (newArray[i] === inputValue) {
+			hasProduct = true;
+		}
+		// newArray[i] === inputValue ? (hasProduct = true) : '';
+	}
+	if (!hasProduct) {
+		newArray.unshift(inputValue);
+		errorText.textContent = '';
+	} else {
+		errorText.textContent = 'Bu mahsulot sizda mavjud';
+	}
+
+	productListELement.textContent = '';
+	productInputElement.value = '';
+	addListHandler(newArray, productListELement);
+});
+
+addListHandler(newArray, productListELement);
+
 // const elInput = document.querySelector('#space');
 // const elForm = document.querySelector('form');
 // const elImage = document.querySelector('#main-image');
