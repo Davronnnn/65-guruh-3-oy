@@ -1,43 +1,28 @@
-//! product list
-const productListELement = document.querySelector('#product-list');
-const productInputElement = document.querySelector('input');
-const formElement = document.querySelector('form');
-const errorText = document.querySelector('#error-text');
+//word
+const words = 'kartoshka piyoz sabzi shorbodring karamiddinjon olma';
 
-const newArray = ['kartoshka', 'piyoz', 'sabzi', 'karam', 'olma'];
+// words.split(' ').forEach((element) => {
+// 	console.log(element);
+// });
 
-function addListHandler(array, list) {
-	for (let i = 0; i < array.length; i++) {
-		const newLi = document.createElement('li');
-		newLi.innerHTML = `<p class="text-danger"> ${i + 1} ${array[i]} </p>`;
-		list.appendChild(newLi);
+function longWord(text) {
+	const array = text.split(' ');
+	let longWord = array[0];
+
+	for (let i = 1; i < array.length; i++) {
+		if (longWord.length < array[i].length) {
+			longWord = array[i];
+		}
 	}
+	array.forEach(function (item, i, nimadir) {
+		if (longWord.length < item.length) {
+			longWord = item;
+		}
+	});
+	return longWord;
 }
 
-formElement.addEventListener('submit', function (e) {
-	e.preventDefault();
-
-	let hasProduct = false;
-	const inputValue = productInputElement.value;
-	for (let i = 0; i < newArray.length; i++) {
-		if (newArray[i] === inputValue) {
-			hasProduct = true;
-		}
-		// newArray[i] === inputValue ? (hasProduct = true) : '';
-	}
-	if (!hasProduct) {
-		newArray.unshift(inputValue);
-		errorText.textContent = '';
-	} else {
-		errorText.textContent = 'Bu mahsulot sizda mavjud';
-	}
-
-	productListELement.textContent = '';
-	productInputElement.value = '';
-	addListHandler(newArray, productListELement);
-});
-
-addListHandler(newArray, productListELement);
+console.log(longWord(words));
 
 // const elInput = document.querySelector('#space');
 // const elForm = document.querySelector('form');
