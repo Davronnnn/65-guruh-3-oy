@@ -1,113 +1,41 @@
-//! product list
-const productListELement = document.querySelector('#product-list');
-const productInputElement = document.querySelector('.new-product-input');
-const productImgElement = document.querySelector('#image-input');
-const formElement = document.querySelector('form');
-const errorText = document.querySelector('#error-text');
+const elUserList = document.querySelector('#users-list');
 
-const todos = [
-	{
-		id: 0,
-		todo: "Kitob o'qish",
-		isCompleted: false,
-	},
-	{
-		id: 1,
-		todo: "Kitob o'qish",
-		isCompleted: false,
-	},
-];
-
-const products = [
-	{
-		id: 1,
-		name: 'kartoshka',
-		price: 15,
-		location: 'Tashkent',
-		img: 'https://yuz.uz/imageproxy/1200x/https://yuz.uz/file/news/b50214c53b9e73eb22aa6970b47dd7cf.jpg',
-	},
-	{
-		id: 2,
-		name: 'piyoz',
-		price: 7,
-		location: 'Tashkent',
-		img: 'https://shifo.uz/upload/iblock/3e9/3e996757a60eccf7eca955e1d2e5a907.jpg',
-	},
-	{
-		id: 3,
-		name: 'sabzi',
-		price: 12,
-		location: 'Tashkent',
-		img: '',
-	},
-	{
-		id: 4,
-		name: 'olma',
-		price: 23,
-		location: 'Tashkent',
-		img: '',
-	},
-];
-
-function addListHandler(array, list) {
+const renderFilms = function (array, parentElement) {
 	for (let i = 0; i < array.length; i++) {
+		const user = array[i];
 		const newLi = document.createElement('li');
 
-		const img = document.createElement('img');
-		const span = document.createElement('span');
-		const title = document.createElement('p');
+		newLi.className = 'list-item border m-5 p-3 text-center';
+		newLi.innerHTML = `
+                        <h3 >${user.name}</h3>
+						<p>${user.username}</p>
+						<p>${user.email}</p>
+						<p>${user.phone}</p>
+						<p>${
+							user.address.street +
+							' ' +
+							user.address.suite +
+							' ' +
+							user.address.city
+						}</p>
+						<p>${user.company.name} <span>${user.company.catchPhrase}</span></p>
+    `;
 
-		title.className = 'text-primary';
-		title.textContent = i + 1 + ' ' + array[i].name;
-		span.className = 'text-danger';
-		span.textContent = ' Narxi:' + array[i].price;
-
-		img.setAttribute('src', array[i].img);
-		img.setAttribute('width', 200);
-
-		newLi.appendChild(title);
-		newLi.appendChild(img);
-		newLi.appendChild(span);
-
-		list.appendChild(newLi);
+		parentElement.appendChild(newLi);
 	}
-}
+};
 
-formElement.addEventListener('submit', function (e) {
-	e.preventDefault();
+renderFilms(users, elUserList);
+const array = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
 
-	const textInput = productInputElement.value;
-	const imgInput = productImgElement.value;
+const index = array.indexOf(8);
+const findIndex = users.findIndex((element) => element.id === 8);
 
-	if (textInput !== '' && imgInput !== '') {
-		const newProduct = {
-			id: products.length + 1,
-			name: textInput,
-			img: imgInput,
-		};
+// console.log(array.includes(3, 5));
+const fillArray = array.reverse();
 
-		let hasProduct = false;
-		for (let i = 0; i < products.length; i++) {
-			if (products[i].name === textInput) {
-				hasProduct = true;
-			}
-		}
+// find findIndex Filter indexOf
 
-		if (!hasProduct) {
-			products.unshift(newProduct);
-			errorText.textContent = '';
-		} else {
-			errorText.textContent = 'Bu mahsulot sizda mavjud';
-		}
+const result = users.filter((element) => element.id !== 3);
 
-		productListELement.textContent = '';
-		productInputElement.value = '';
-		productImgElement.value = '';
-
-		addListHandler(products, productListELement);
-	} else {
-		errorText.textContent = "Iltimos ma'lumotlarni to'ldiring";
-	}
-});
-
-addListHandler(products, productListELement);
+console.log(fillArray);
