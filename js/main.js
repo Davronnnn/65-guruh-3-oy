@@ -1,41 +1,72 @@
-const elUserList = document.querySelector('#users-list');
+const elCards = document.querySelector('.cards');
 
-const renderFilms = function (array, parentElement) {
+const renderFilms = (array, parentElement) => {
+	parentElement.textContent = '';
 	for (let i = 0; i < array.length; i++) {
-		const user = array[i];
-		const newLi = document.createElement('li');
+		const element = array[i];
+		const genres = element.genres;
+		const card = document.createElement('div');
+		const ulGenres = document.createElement('ul');
 
-		newLi.className = 'list-item border m-5 p-3 text-center';
-		newLi.innerHTML = `
-                        <h3 >${user.name}</h3>
-						<p>${user.username}</p>
-						<p>${user.email}</p>
-						<p>${user.phone}</p>
-						<p>${
-							user.address.street +
-							' ' +
-							user.address.suite +
-							' ' +
-							user.address.city
-						}</p>
-						<p>${user.company.name} <span>${user.company.catchPhrase}</span></p>
-    `;
+		let normalDate = new Date(element.release_date).toLocaleString(
+			'en-GB',
+			{
+				timeZone: 'UTC',
+			}
+		);
 
-		parentElement.appendChild(newLi);
+		for (let i = 0; i < genres.length; i++) {
+			const element = genres[i];
+
+			const elGenre = document.createElement('li');
+
+			elGenre.textContent = element;
+
+			ulGenres.appendChild(elGenre);
+		}
+
+		card.setAttribute('title', 'salom');
+		card.className = 'card';
+		card.style.width = '18rem';
+
+		card.innerHTML = `
+	<img
+		class='card-img-top'
+		src=${element.poster}
+		alt=${element.title}
+	/>
+	<div class='card-body'>
+		<h5 class='card-title'>${element.title}</h5>
+		<p class='card-text'>
+			${element.overview}
+		</p>
+		<p class='text-primary'>${normalDate}</p>
+		
+	</div>
+	`;
+		card.appendChild(ulGenres);
+
+		parentElement.appendChild(card);
 	}
 };
 
-renderFilms(users, elUserList);
-const array = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
+renderFilms(films, elCards);
 
-const index = array.indexOf(8);
-const findIndex = users.findIndex((element) => element.id === 8);
+forms.addEvente('submit', () => {
+	const title = input.value;
+	const img = input.value;
+	const overview = input.value;
 
-// console.log(array.includes(3, 5));
-const fillArray = array.reverse();
+	const obj = {
+		id: '287947',
+		title: title,
+		poster: img,
+		overview: overview,
+		release_date: 1665644873352,
+		genres: ['Action', 'Comedy', 'Fantasy'],
+	};
 
-// find findIndex Filter indexOf
+	films.unshift(obj);
 
-const result = users.filter((element) => element.id !== 3);
-
-console.log(fillArray);
+	renderFilms(films, elCards);
+});

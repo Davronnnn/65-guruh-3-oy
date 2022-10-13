@@ -1,3 +1,28 @@
+cardImg.className = 'card-img-top';
+cardImg.src = element.poster;
+cardImg.alt = element.title;
+
+cardBody.className = 'card-body';
+
+cardTitle.className = 'card-title';
+cardTitle.textContent = element.title;
+
+cardOverview.className = 'card-text';
+cardOverview.textContent = element.overview;
+
+cardDate.className = 'text-primary';
+cardDate.textContent = element.release_date;
+
+cardGenres.textContent = element.genres;
+
+cardBody.appendChild(cardTitle);
+cardBody.appendChild(cardOverview);
+cardBody.appendChild(cardDate);
+cardBody.appendChild(cardGenres);
+
+card.appendChild(cardImg);
+card.appendChild(cardBody);
+
 //! product list
 const productListELement = document.querySelector('#product-list');
 const productInputElement = document.querySelector('.new-product-input');
