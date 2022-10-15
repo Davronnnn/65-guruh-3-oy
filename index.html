@@ -8,23 +8,90 @@
 
 		<link
 			rel="stylesheet"
+			href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"
+		/>
+		<link
+			rel="stylesheet"
 			href="./node_modules/bootstrap/dist/css/bootstrap.min.css"
 		/>
-		<!-- <link rel="stylesheet" href="./css/style.css" /> -->
+
+		<style>
+			#toggle {
+				font-size: 3rem;
+			}
+			#form {
+				display: none;
+			}
+			.modal2 {
+				display: none;
+
+				position: absolute;
+				left: 0;
+				top: 0;
+
+				width: 100vw;
+				height: 100%;
+				/* display: flex; */
+				justify-content: center;
+				align-items: center;
+				background-color: rgba(0, 0, 0, 0.3);
+			}
+			.modal-content {
+				width: 40%;
+				background-color: gray;
+				color: blue;
+				padding: 30px;
+			}
+		</style>
+
 		<title>Document</title>
 	</head>
 	<body>
 		<div class="container my-5">
 			<h3 class="text-center text-primary">Sizning mahsulotlaringiz</h3>
 			<div class="card shadow">
-				<form class="my-3 mx-auto w-50">
+				<input
+					class="form-control"
+					type="text"
+					id="search"
+					placeholder="Search..."
+				/>
+
+				<p id="toggle" onclick="formToggleHandler()">+</p>
+				<form id="form" class="my-3 mx-auto w-50 form">
 					<input
 						type="text"
-						class="new-product-input"
-						placeholder="Mahsulotingizni qo'shing "
+						id="film-title"
+						placeholder="Film nomi"
+						class="form-control mb-2"
 					/>
-					<input type="text" id="image-input" />
-					<button type="submit">Yuklash</button>
+					<input
+						type="text"
+						id="film-image"
+						placeholder="Film sur'ati"
+						class="form-control mb-2"
+					/>
+					<input
+						type="text"
+						id="film-overview"
+						placeholder="Film haqida qisqacha"
+						class="form-control mb-2"
+					/>
+					<input
+						type="date"
+						id="film-date"
+						placeholder="film chiqarilgan sana"
+						class="form-control mb-2"
+					/>
+					<input
+						type="text"
+						id="film-genres"
+						placeholder="Film janr turlari"
+						class="form-control mb-2"
+					/>
+					<button class="btn btn-primary w-100" type="submit">
+						Yuklash
+					</button>
 				</form>
 
 				<div class="cards d-flex flex-wrap gap-5 mx-auto"></div>

@@ -1,3 +1,44 @@
+//! Tab
+const title = document.querySelector('#title');
+const description = document.querySelector('#description');
+
+function homeFunction() {
+	title.textContent = 'Home';
+	description.textContent = 'description';
+	title.className = 'animate__animated animate__fadeIn';
+}
+function aboutFunction() {
+	title.textContent = 'About';
+	description.textContent = 'description2';
+	title.className = 'animate__animated animate__fadeIn';
+}
+function contactFunction() {
+	title.textContent = 'Contact';
+	description.textContent = 'description3';
+	title.className = 'animate__animated animate__fadeIn';
+}
+//
+
+forms.addEvente('submit', () => {
+	const title = input.value;
+	const img = input.value;
+	const overview = input.value;
+
+	const obj = {
+		id: '287947',
+		title: title,
+		poster: img,
+		overview: overview,
+		release_date: 1665644873352,
+		genres: ['Action', 'Comedy', 'Fantasy'],
+	};
+
+	films.unshift(obj);
+
+	renderFilms(films, elCards);
+});
+
+//
 cardImg.className = 'card-img-top';
 cardImg.src = element.poster;
 cardImg.alt = element.title;
