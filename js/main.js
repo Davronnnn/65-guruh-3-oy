@@ -2,6 +2,33 @@ const elForm = document.querySelector('#form');
 const elCards = document.querySelector('.cards');
 const elSearch = document.querySelector('#search');
 const toggleText = document.querySelector('#toggle');
+const elGenresSelect = document.querySelector('#genres');
+const templateFilm = document.querySelector('#film-template');
+
+const genres = [];
+
+function genresFinder(array) {
+	array.forEach((film) => {
+		film.genres.forEach((genre) => {
+			if (!genres.includes(genre)) {
+				genres.push(genre);
+			}
+		});
+	});
+}
+
+function filmDescription(e) {
+	console.log(e.target);
+}
+
+function renderGenres(array, parent) {
+	array.forEach((genre) => {
+		const newOption = document.createElement('option');
+		newOption.setAttribute('value', genre);
+		newOption.textContent = genre;
+		parent.appendChild(newOption);
+	});
+}
 
 function formToggleHandler(e) {
 	if (toggleText.textContent === '+') {
@@ -20,9 +47,6 @@ function renderFilms(array, parentElement = elCards) {
 		const element = array[i];
 		const genres = element.genres;
 
-		const card = document.createElement('div');
-		const ulGenres = document.createElement('ul');
-
 		let normalDate = new Date(element.release_date).toLocaleString(
 			'en-GB',
 			{
@@ -30,38 +54,50 @@ function renderFilms(array, parentElement = elCards) {
 			}
 		);
 
+		const clone = templateFilm.content.cloneNode(true);
+		const card = clone.querySelector('.card');
+		const title = clone.querySelector('.card-title');
+		const img = clone.querySelector('.card-img-top');
+		const overview = clone.querySelector('.card-text');
+		const date = clone.querySelector('.text-primary');
+		const ul = clone.querySelector('ul');
+		const btn = clone.querySelector('.btn');
+		btn.dataset.id = element.id;
+		console.log(btn);
 		for (let i = 0; i < genres.length; i++) {
 			const element = genres[i];
-
 			const elGenre = document.createElement('li');
-
+			elGenre.className = 'list-group-item';
 			elGenre.textContent = element;
-
-			ulGenres.appendChild(elGenre);
+			ul.appendChild(elGenre);
 		}
 
-		card.className = 'card';
-		card.style.width = '18rem';
-
-		card.innerHTML = `
-		<img
-			class='card-img-top'
-			src=${element.poster}
-			alt=${element.title}
-		/>
-		<div class='card-body'>
-			<h5 class='card-title'>${element.title}</h5>
-			<p class='card-text'>
-				${element.overview}
-			</p>
-			<p class='text-primary'>${normalDate}</p>
-		</div>
-	`;
-		card.appendChild(ulGenres);
+		title.textContent = element.title;
+		img.src = element.poster;
+		overview.textContent = element.overview;
+		date.textContent = normalDate;
 
 		parentElement.appendChild(card);
 	}
 }
+
+elGenresSelect.addEventListener('change', (e) => {
+	const value = e.target.value;
+	let filteredArray = [];
+
+	if (value === 'all') {
+		filteredArray = films;
+	} else {
+		films.forEach((film) => {
+			film.genres.forEach((genre) => {
+				if (genre == value) {
+					filteredArray.push(film);
+				}
+			});
+		});
+	}
+	renderFilms(filteredArray);
+});
 
 elSearch.addEventListener('input', (e) => {
 	e.preventDefault();
@@ -102,4 +138,6 @@ elForm.addEventListener('submit', (e) => {
 	}
 });
 
+genresFinder(films);
+renderGenres(genres, elGenresSelect);
 renderFilms(films);
