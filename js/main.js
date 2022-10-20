@@ -1,143 +1,110 @@
-const elForm = document.querySelector('#form');
-const elCards = document.querySelector('.cards');
-const elSearch = document.querySelector('#search');
-const toggleText = document.querySelector('#toggle');
-const elGenresSelect = document.querySelector('#genres');
-const templateFilm = document.querySelector('#film-template');
+const elTodos = document.querySelector('#todos');
+const elTodoTemplate = document.querySelector('#todo-template');
+const elNewTodoInput = document.querySelector('#new-todo');
+let todos = [
+	{
+		id: 0,
+		name: 'todo1',
+		isCompleted: false,
+		description: '',
+	},
+	{
+		id: 1,
+		name: 'todo2',
+		isCompleted: true,
+		description: '',
+	},
+	{
+		id: 2,
+		name: 'todo3',
+		isCompleted: false,
+		description: '',
+	},
+];
 
-const genres = [];
-
-function genresFinder(array) {
-	array.forEach((film) => {
-		film.genres.forEach((genre) => {
-			if (!genres.includes(genre)) {
-				genres.push(genre);
-			}
-		});
-	});
-}
-
-function filmDescription(e) {
-	console.log(e.target);
-}
-
-function renderGenres(array, parent) {
-	array.forEach((genre) => {
-		const newOption = document.createElement('option');
-		newOption.setAttribute('value', genre);
-		newOption.textContent = genre;
-		parent.appendChild(newOption);
-	});
-}
-
-function formToggleHandler(e) {
-	if (toggleText.textContent === '+') {
-		elForm.style.display = 'block';
-		toggleText.textContent = '-';
-	} else {
-		elForm.style.display = 'none';
-		toggleText.textContent = '+';
-	}
-}
-
-function renderFilms(array, parentElement = elCards) {
-	parentElement.textContent = '';
+const renderTodos = (array, parent = elTodos) => {
+	parent.textContent = '';
+	const fragment = document.createDocumentFragment();
 
 	for (let i = 0; i < array.length; i++) {
-		const element = array[i];
-		const genres = element.genres;
+		const todo = array[i];
+		const cloneTodo = elTodoTemplate.content.cloneNode(true);
+		const inputTodo = cloneTodo.querySelector('#todo-input');
+		const delBtn = cloneTodo.querySelector('#delete-btn');
+		const editBtn = cloneTodo.querySelector('#edit-btn');
+		const checkBoxBtn = cloneTodo.querySelector('#checkbox');
+		const span = cloneTodo.querySelector('span');
 
-		let normalDate = new Date(element.release_date).toLocaleString(
-			'en-GB',
-			{
-				timeZone: 'UTC',
-			}
-		);
-
-		const clone = templateFilm.content.cloneNode(true);
-		const card = clone.querySelector('.card');
-		const title = clone.querySelector('.card-title');
-		const img = clone.querySelector('.card-img-top');
-		const overview = clone.querySelector('.card-text');
-		const date = clone.querySelector('.text-primary');
-		const ul = clone.querySelector('ul');
-		const btn = clone.querySelector('.btn');
-		btn.dataset.id = element.id;
-		console.log(btn);
-		for (let i = 0; i < genres.length; i++) {
-			const element = genres[i];
-			const elGenre = document.createElement('li');
-			elGenre.className = 'list-group-item';
-			elGenre.textContent = element;
-			ul.appendChild(elGenre);
+		if (todo.isCompleted) {
+			checkBoxBtn.checked = 'true';
 		}
 
-		title.textContent = element.title;
-		img.src = element.poster;
-		overview.textContent = element.overview;
-		date.textContent = normalDate;
+		inputTodo.disabled = true;
 
-		parentElement.appendChild(card);
+		checkBoxBtn.dataset.id = todo.id;
+		delBtn.dataset.id = todo.id;
+		editBtn.dataset.id = todo.id;
+
+		span.textContent = i + 1;
+		inputTodo.value = todo.name;
+
+		fragment.appendChild(cloneTodo);
 	}
-}
 
-elGenresSelect.addEventListener('change', (e) => {
-	const value = e.target.value;
-	let filteredArray = [];
+	parent.appendChild(fragment);
+};
 
-	if (value === 'all') {
-		filteredArray = films;
-	} else {
-		films.forEach((film) => {
-			film.genres.forEach((genre) => {
-				if (genre == value) {
-					filteredArray.push(film);
-				}
-			});
-		});
-	}
-	renderFilms(filteredArray);
-});
+const addNewTodo = () => {
+	const newTodo = {
+		id: todos[todos.length - 1]?.id + 1 || 0,
+		name: elNewTodoInput.value,
+		isCompleted: false,
+		description: '',
+	};
 
-elSearch.addEventListener('input', (e) => {
-	e.preventDefault();
+	todos.push(newTodo);
+	renderTodos(todos);
+	elNewTodoInput.value = '';
+};
 
-	const searchText = elSearch.value.trim().toLowerCase();
-	const filteredArray = [];
-	films.forEach((film) => {
-		if (film.title.toLowerCase().includes(searchText)) {
-			filteredArray.push(film);
+const updateTodo = (id, name) => {
+	todos.forEach((element) => {
+		if (element.id === id) {
+			element.name = name;
 		}
 	});
+};
 
-	renderFilms(filteredArray);
-});
+elTodos.addEventListener('click', (e) => {
+	const element = e.target;
 
-elForm.addEventListener('submit', (e) => {
-	e.preventDefault();
+	if (element.className === 'fas fa-trash-alt') {
+		const id = Number(element.dataset.id);
 
-	const title = e.target[0].value;
-	const img = e.target[1].value;
-	const overview = e.target[2].value;
-	const date = e.target[3].value;
-	const genres = e.target[4].value;
+		todos = todos.filter((todo) => todo.id !== id);
 
-	if (title && img && overview && date && genres) {
-		const newFilm = {
-			id: String(Number(films[films.length - 1].id) + 1 || 0),
-			title: title,
-			poster: img,
-			overview: overview,
-			release_date: date,
-			genres: [genres],
-		};
-		films.unshift(newFilm);
-		renderFilms(films);
-	} else {
-		alert("ma'lumotlarni to'ldiring");
+		renderTodos(todos);
+	}
+
+	if (element.className === 'fas fa-pencil-alt me-3') {
+		const id = Number(element.dataset.id);
+
+		updateTodo(id, elNewTodoInput.value);
+		elNewTodoInput.value = '';
+		renderTodos(todos);
+	}
+
+	if (element.id === 'checkbox') {
+		const id = Number(element.dataset.id);
+
+		todos.forEach((element) => {
+			if (element.id === id) {
+				element.isCompleted = !element.isCompleted;
+			}
+		});
+
+		renderTodos(todos);
 	}
 });
 
-genresFinder(films);
-renderGenres(genres, elGenresSelect);
-renderFilms(films);
+renderTodos(todos, elTodos);
